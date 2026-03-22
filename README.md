@@ -16,3 +16,4 @@ All scripts are located in `shell/` and target Ubuntu/Debian-based systems.
 | `install-python-dev.sh` | Installs Python dev tools from [Astral](https://astral.sh): uv (package manager), ruff (linter/formatter), and ty (type checker) | No |
 | `install-rust.sh` | Installs the Rust stable toolchain via rustup for the `sherpa` user | No |
 | `install-virt.sh` | Installs QEMU/KVM and libvirt for virtual machine management | Yes |
+| `setup-paths.sh` | Adds `$HOME/.local/bin` to PATH in `.bashrc` and `.zshrc` (idempotent) | No |
