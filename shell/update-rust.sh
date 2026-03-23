@@ -1,17 +1,9 @@
 #!/bin/bash
 set -euo pipefail
 
-# Update the system-wide Rust toolchain via rustup.
-# Intended to be run as root by cloud-init on first boot.
+# Update the Rust toolchain via rustup.
 
-if [ "$(id -u)" -ne 0 ]; then
-  echo "Error: This script must be run as root."
-  exit 1
-fi
-
-export RUSTUP_HOME=/usr/local/rustup
-export CARGO_HOME=/usr/local/cargo
-export PATH="/usr/local/cargo/bin:$PATH"
+source "$HOME/.cargo/env"
 
 echo "Updating Rust toolchain..."
 rustup update stable
