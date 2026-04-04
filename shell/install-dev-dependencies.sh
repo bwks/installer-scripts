@@ -21,6 +21,7 @@ apt-get install -y -qq \
   genisoimage \
   mtools \
   e2fsprogs \
+  unzip \
   > /dev/null
 
 echo "All development dependencies installed."
