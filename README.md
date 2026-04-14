@@ -10,6 +10,7 @@ All scripts are located in `shell/` and target Ubuntu/Debian-based systems.
 |--------|-------------|:---:|
 | `install-awscli.sh` | Installs the [AWS CLI v2](https://aws.amazon.com/cli/) from the official zip bundle | No (uses sudo) |
 | `install-azurecli.sh` | Installs the [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/) via the Microsoft apt repository | Yes |
+| `install-cargo-tools.sh` | Installs cargo-based dev tools ([cargo-nextest](https://nexte.st/), [cargo-llvm-cov](https://github.com/taiki-e/cargo-llvm-cov)) for the current user | No (requires Rust) |
 | `install-claudecode.sh` | Installs [Claude Code](https://claude.ai) CLI for the current user via the official install script | No |
 | `install-dev-dependencies.sh` | Installs C build toolchain and headers for Rust FFI crates (build-essential, pkg-config, libssl-dev, libvirt-dev, etc.) | Yes |
 | `install-docker.sh` | Installs Docker Engine, CLI, Buildx, and Compose via the official Docker apt repository | Yes |
