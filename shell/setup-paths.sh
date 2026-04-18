@@ -1,30 +1,35 @@
 #!/bin/bash
 set -euo pipefail
 
-# Ensure $HOME/.local/bin is on the PATH for the current user.
+# Ensure user-local bin directories are on PATH for the current user.
 # Supports bash and zsh. Idempotent — won't add duplicates.
 
-EXPORT_LINE='export PATH="$HOME/.local/bin:$PATH"'
+PATH_DIRS=(
+  "$HOME/.local/bin"
+  "$HOME/.opencode/bin"
+)
 
 add_to_file() {
   local file="$1"
-  if [ -f "$file" ] && grep -qF '.local/bin' "$file"; then
-    echo "Already present in $file, skipping."
+  local dir="$2"
+  local marker="# PATH: ${dir/#$HOME/\$HOME}"
+  if [ -f "$file" ] && grep -qF "$marker" "$file"; then
+    echo "Already present in $file: $dir"
   else
-    echo "$EXPORT_LINE" >> "$file"
-    echo "Added to $file."
+    {
+      echo "$marker"
+      echo "export PATH=\"${dir/#$HOME/\$HOME}:\$PATH\""
+    } >> "$file"
+    echo "Added to $file: $dir"
   fi
 }
 
-# bash
-add_to_file "$HOME/.bashrc"
+for dir in "${PATH_DIRS[@]}"; do
+  add_to_file "$HOME/.bashrc" "$dir"
+  if command -v zsh &> /dev/null; then
+    add_to_file "$HOME/.zshrc" "$dir"
+  fi
+  export PATH="$dir:$PATH"
+done
 
-# zsh (if installed)
-if command -v zsh &> /dev/null; then
-  add_to_file "$HOME/.zshrc"
-fi
-
-# Apply to current session
-export PATH="$HOME/.local/bin:$PATH"
-
-echo "Done. \$HOME/.local/bin is now on your PATH."
+echo "Done. PATH updated with: ${PATH_DIRS[*]}"
