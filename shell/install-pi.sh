@@ -12,12 +12,9 @@ fi
 
 echo "Installing pi (Pi Coding Agent)..."
 
-# Install globally. Uses sudo if npm's global prefix is not user-writable.
-if [ -w "$(npm config get prefix)" ]; then
-    npm install -g @mariozechner/pi-coding-agent
-else
-    sudo npm install -g @mariozechner/pi-coding-agent
-fi
+# Install into the user-local prefix (~/.local) so it works without sudo.
+# The binary lands in ~/.local/bin which should be on PATH.
+npm install -g --prefix "$HOME/.local" @mariozechner/pi-coding-agent
 
 # Verify
 pi --version || pi --help | head -n 1
