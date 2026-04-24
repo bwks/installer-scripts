@@ -1,41 +1,54 @@
 #!/bin/bash
 set -euo pipefail
 
-# Install Node.js (LTS) and npm on Debian/Ubuntu systems via the official
-# NodeSource apt repository.
-# https://github.com/nodesource/distributions
-# Usage: sudo ./install-nodejs.sh
+# Install NVM and Node.js (latest LTS by default) for the current user.
+# https://github.com/nvm-sh/nvm
+# Usage: ./install-nodejs.sh
+# Optional env vars:
+#   NVM_VERSION=v0.40.3
+#   NODE_VERSION='lts/*'
 
-if [ "$(id -u)" -ne 0 ]; then
-  echo "Error: This script must be run as root (use sudo)."
+if [ "$(id -u)" -eq 0 ] || [ -n "${SUDO_USER:-}" ]; then
+  echo "Error: This script installs NVM for the current user and must not be run as root or with sudo."
   exit 1
 fi
 
-# Node.js major version to install (LTS).
-NODE_MAJOR="${NODE_MAJOR:-22}"
+if ! command -v curl > /dev/null 2>&1; then
+  echo "Error: curl is required. Install curl first, then rerun this script."
+  exit 1
+fi
 
-echo "Installing Node.js ${NODE_MAJOR}.x (LTS) and npm..."
+NVM_VERSION="${NVM_VERSION:-v0.40.3}"
+NODE_VERSION="${NODE_VERSION:-lts/*}"
+export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
 
-# Ensure prerequisites are present.
-apt-get update -qq
-apt-get install -y -qq ca-certificates curl gnupg > /dev/null
+echo "Installing/updating NVM ${NVM_VERSION}..."
+curl -fsSL "https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERSION}/install.sh" | bash
 
-# Add the NodeSource GPG key.
-mkdir -p -m 755 /etc/apt/keyrings
-curl -fsSL "https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key" \
-  | gpg --dearmor --yes -o /etc/apt/keyrings/nodesource.gpg
-chmod go+r /etc/apt/keyrings/nodesource.gpg
+if [ ! -s "$NVM_DIR/nvm.sh" ]; then
+  echo "Error: NVM installation did not create $NVM_DIR/nvm.sh."
+  exit 1
+fi
 
-# Add the NodeSource apt repository.
-echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_${NODE_MAJOR}.x nodistro main" \
-  > /etc/apt/sources.list.d/nodesource.list
+# Load NVM for this shell so Node.js can be installed and verified immediately.
+# shellcheck source=/dev/null
+. "$NVM_DIR/nvm.sh"
 
-# Install Node.js (bundles npm).
-apt-get update -qq
-apt-get install -y -qq nodejs > /dev/null
+echo "Installing Node.js ${NODE_VERSION} via NVM..."
+nvm install "$NODE_VERSION"
+
+INSTALLED_VERSION="$(nvm version "$NODE_VERSION")"
+if [ "$INSTALLED_VERSION" = "N/A" ]; then
+  echo "Error: Node.js version '$NODE_VERSION' was not installed successfully."
+  exit 1
+fi
+
+nvm alias default "$INSTALLED_VERSION" > /dev/null
+nvm use default > /dev/null
 
 # Verify
+nvm --version
 node --version
 npm --version
 
-echo "Node.js installation complete."
+echo "Node.js installation complete. Restart your shell or source your profile to use node/npm in new sessions."
