@@ -46,8 +46,8 @@ as_target() {
   fi
 }
 
-TMUX_CONF="${TMUX_CONF:-$TARGET_HOME/.tmux.conf}"
-TMUX_PLUGIN_DIR="$TARGET_HOME/.tmux/plugins"
+TMUX_CONF="${TMUX_CONF:-$TARGET_HOME/.config/tmux/tmux.conf}"
+TMUX_PLUGIN_DIR="$TARGET_HOME/.config/tmux/plugins"
 
 install_or_update_plugin() {
   local plugin_path="$1"
@@ -98,8 +98,8 @@ as_root apt-get update -qq
 as_root env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq tmux git > /dev/null
 
 # Install/update plugins referenced by the tmux configuration.
-if [ "$(id -u)" -eq 0 ] && [ "$TARGET_USER" != "root" ] && [ -d "$TARGET_HOME/.tmux" ]; then
-  chown -R "$TARGET_USER:$TARGET_GROUP" "$TARGET_HOME/.tmux"
+if [ "$(id -u)" -eq 0 ] && [ "$TARGET_USER" != "root" ] && [ -d "$TARGET_HOME/.config/tmux" ]; then
+  chown -R "$TARGET_USER:$TARGET_GROUP" "$TARGET_HOME/.config/tmux"
 fi
 as_target mkdir -p "$TMUX_PLUGIN_DIR"
 install_or_update_plugin "tmux-resurrect" "https://github.com/tmux-plugins/tmux-resurrect" "master"
@@ -160,14 +160,14 @@ bind -n M-h previous-window
 bind -n M-l next-window
 
 # Reload configuration quickly with prefix + r.
-bind r source-file ~/.tmux.conf \; display-message "Reloaded ~/.tmux.conf"
+bind r source-file ~/.config/tmux/tmux.conf \; display-message "Reloaded ~/.config/tmux/tmux.conf"
 
 set -g @catppuccin_flavor "mocha"
 set -g @catppuccin_window_status_style "rounded"
 
 # Plugins
-run '~/.tmux/plugins/tmux-resurrect/resurrect.tmux'
-run '~/.tmux/plugins/catppuccin/tmux/catppuccin.tmux'
+run '~/.config/tmux/plugins/tmux-resurrect/resurrect.tmux'
+run '~/.config/tmux/plugins/catppuccin/tmux/catppuccin.tmux'
 
 # Status bar layout
 set -g status-position top
@@ -183,8 +183,8 @@ chmod 0644 "$TMUX_CONF"
 
 if [ "$(id -u)" -eq 0 ] && [ "$TARGET_USER" != "root" ]; then
   chown "$TARGET_USER:$TARGET_GROUP" "$TMUX_CONF"
-  if [ -d "$TARGET_HOME/.tmux" ]; then
-    chown "$TARGET_USER:$TARGET_GROUP" "$TARGET_HOME/.tmux"
+  if [ -d "$TARGET_HOME/.config/tmux" ]; then
+    chown "$TARGET_USER:$TARGET_GROUP" "$TARGET_HOME/.config/tmux"
   fi
   chown -R "$TARGET_USER:$TARGET_GROUP" "$TMUX_PLUGIN_DIR"
 fi
