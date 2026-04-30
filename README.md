@@ -23,11 +23,13 @@ All scripts are located in `shell/` and target Ubuntu/Debian-based systems.
 | `install-qemu-guest-agent.sh` | Installs and enables the [QEMU Guest Agent](https://wiki.qemu.org/Features/GuestAgent) service | Yes |
 | `install-python-dev.sh` | Installs Python dev tools from [Astral](https://astral.sh) to `/usr/local/bin`: uv (package manager), ruff (linter/formatter), and ty (type checker) | Yes |
 | `install-rust.sh` | Installs the Rust stable toolchain for the current user via [rustup](https://rustup.rs/) | No |
+| `install-starship.sh` | Installs the [Starship](https://starship.rs) prompt for the current user and configures bash/zsh shell initialization | No |
 | `install-terraform.sh` | Installs [HashiCorp Terraform](https://www.terraform.io/) via the official apt repository | Yes |
 | `install-tmux.sh` | Installs [tmux](https://github.com/tmux/tmux/wiki) via apt, writes the custom user config to `~/.config/tmux/tmux.conf`, and installs/updates the required tmux plugins (`tmux-resurrect`, Catppuccin) | No (uses sudo) |
 | `install-unikraft.sh` | Installs the [Unikraft](https://unikraft.org) toolchain (`kraft` via [kraftkit](https://kraftkit.sh)) to `/usr/local/bin` via the official installer | No (uses sudo) |
 | `install-virt.sh` | Installs QEMU/KVM and libvirt for virtual machine management | Yes |
 | `install-zellij.sh` | Installs [Zellij](https://zellij.dev) terminal multiplexer via cargo with custom config and layouts | No (requires Rust) |
+| `install-zsh-ohmyzsh.sh` | Installs [zsh](https://www.zsh.org), sets it as the default login shell, and installs [Oh My Zsh](https://ohmyz.sh) for the current user | No (uses sudo) |
 | `setup-hashicorp-repo.sh` | Adds the HashiCorp apt repository and GPG key (idempotent, used by Packer/Terraform scripts) | Yes |
 | `setup-paths.sh` | Adds `$HOME/.local/bin` to PATH in `.bashrc` and `.zshrc` (idempotent) | No |
 | `update-claudecode.sh` | Updates Claude Code to the latest version in `/usr/local/bin` | Yes |
