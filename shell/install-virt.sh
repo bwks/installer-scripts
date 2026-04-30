@@ -2,17 +2,24 @@
 set -euo pipefail
 
 # Install QEMU/KVM and libvirt on Ubuntu.
-# Usage: sudo ./install_virt.sh
 
-if [ "$(id -u)" -ne 0 ]; then
-  echo "Error: This script must be run as root (use sudo)."
+if [ "$(id -u)" -ne 0 ] && ! command -v sudo &> /dev/null; then
+  echo "Error: sudo is required when running as a non-root user."
   exit 1
 fi
 
+as_root() {
+  if [ "$(id -u)" -eq 0 ]; then
+    "$@"
+  else
+    sudo "$@"
+  fi
+}
+
 echo "Installing QEMU/KVM and libvirt..."
 
-apt-get update -qq
-apt-get install -y -qq \
+as_root apt-get update -qq
+as_root apt-get install -y -qq \
   qemu-kvm \
   qemu-utils \
   libvirt-daemon-system \
@@ -23,11 +30,11 @@ apt-get install -y -qq \
   > /dev/null
 
 # Enable and start libvirtd
-systemctl enable --now libvirtd
+as_root systemctl enable --now libvirtd
 
 # Add the sherpa user to libvirt and kvm groups
-usermod -aG libvirt sherpa
-usermod -aG kvm sherpa
+as_root usermod -aG libvirt sherpa
+as_root usermod -aG kvm sherpa
 echo "Added sherpa to libvirt and kvm groups."
 
 # Verify

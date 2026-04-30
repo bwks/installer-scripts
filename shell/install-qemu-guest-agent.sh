@@ -2,19 +2,26 @@
 set -euo pipefail
 
 # Install and enable qemu-guest-agent on Ubuntu.
-# Executed by cloud-init as root.
 
-if [ "$(id -u)" -ne 0 ]; then
-  echo "Error: This script must be run as root."
+if [ "$(id -u)" -ne 0 ] && ! command -v sudo &> /dev/null; then
+  echo "Error: sudo is required when running as a non-root user."
   exit 1
 fi
 
+as_root() {
+  if [ "$(id -u)" -eq 0 ]; then
+    "$@"
+  else
+    sudo "$@"
+  fi
+}
+
 echo "Installing qemu-guest-agent..."
 
-apt-get update -qq
-apt-get install -y -qq qemu-guest-agent > /dev/null
+as_root apt-get update -qq
+as_root apt-get install -y -qq qemu-guest-agent > /dev/null
 
-systemctl enable --now qemu-guest-agent
+as_root systemctl enable --now qemu-guest-agent
 
 echo ""
 echo "qemu-guest-agent installed and running."

@@ -2,12 +2,19 @@
 set -euo pipefail
 
 # Install Tailscale on Ubuntu/Debian via the official Tailscale apt repository.
-# Executed by cloud-init as root.
 
-if [ "$(id -u)" -ne 0 ]; then
-  echo "Error: This script must be run as root."
+if [ "$(id -u)" -ne 0 ] && ! command -v sudo &> /dev/null; then
+  echo "Error: sudo is required when running as a non-root user."
   exit 1
 fi
+
+as_root() {
+  if [ "$(id -u)" -eq 0 ]; then
+    "$@"
+  else
+    sudo "$@"
+  fi
+}
 
 if [ ! -r /etc/os-release ]; then
   echo "Error: /etc/os-release not found. This script supports Ubuntu/Debian-based systems."
@@ -34,24 +41,24 @@ fi
 echo "Installing Tailscale..."
 
 # Install dependencies
-apt-get update -qq
-apt-get install -y -qq ca-certificates curl gnupg > /dev/null
+as_root apt-get update -qq
+as_root apt-get install -y -qq ca-certificates curl gnupg > /dev/null
 
 # Add Tailscale GPG key and apt repository
-install -m 0755 -d /usr/share/keyrings
+as_root install -m 0755 -d /usr/share/keyrings
 curl -fsSL "https://pkgs.tailscale.com/stable/${distro}/${VERSION_CODENAME}.noarmor.gpg" \
-  -o /usr/share/keyrings/tailscale-archive-keyring.gpg
-chmod a+r /usr/share/keyrings/tailscale-archive-keyring.gpg
+  | as_root tee /usr/share/keyrings/tailscale-archive-keyring.gpg > /dev/null
+as_root chmod a+r /usr/share/keyrings/tailscale-archive-keyring.gpg
 
 curl -fsSL "https://pkgs.tailscale.com/stable/${distro}/${VERSION_CODENAME}.tailscale-keyring.list" \
-  -o /etc/apt/sources.list.d/tailscale.list
+  | as_root tee /etc/apt/sources.list.d/tailscale.list > /dev/null
 
 # Install Tailscale
-apt-get update -qq
-apt-get install -y -qq tailscale > /dev/null
+as_root apt-get update -qq
+as_root apt-get install -y -qq tailscale > /dev/null
 
 # Enable and start the Tailscale daemon
-systemctl enable --now tailscaled
+as_root systemctl enable --now tailscaled
 
 echo ""
 echo "Tailscale version: $(tailscale version | head -n 1)"

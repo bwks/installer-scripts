@@ -2,12 +2,19 @@
 set -euo pipefail
 
 # Install HashiCorp Terraform on Debian/Ubuntu systems.
-# Usage: sudo ./install-terraform.sh
 
-if [ "$(id -u)" -ne 0 ]; then
-  echo "Error: This script must be run as root (use sudo)."
+if [ "$(id -u)" -ne 0 ] && ! command -v sudo &> /dev/null; then
+  echo "Error: sudo is required when running as a non-root user."
   exit 1
 fi
+
+as_root() {
+  if [ "$(id -u)" -eq 0 ]; then
+    "$@"
+  else
+    sudo "$@"
+  fi
+}
 
 echo "Installing HashiCorp Terraform..."
 
@@ -16,7 +23,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 "$SCRIPT_DIR/setup-hashicorp-repo.sh"
 
 # Install terraform
-apt-get install -y -qq terraform > /dev/null
+as_root apt-get install -y -qq terraform > /dev/null
 
 # Verify
 terraform version
