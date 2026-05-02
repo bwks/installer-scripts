@@ -26,7 +26,7 @@ All scripts are located in `shell/` and target Ubuntu/Debian-based systems.
 | `install-starship.sh` | Installs the [Starship](https://starship.rs) prompt for the current user and configures bash/zsh shell initialization | No |
 | `install-tailscale.sh` | Installs [Tailscale](https://tailscale.com) via the official apt repository, then enables and starts `tailscaled` | Yes |
 | `install-terraform.sh` | Installs [HashiCorp Terraform](https://www.terraform.io/) via the official apt repository | Yes |
-| `install-tmux.sh` | Installs [tmux](https://github.com/tmux/tmux/wiki) via apt, writes the custom user config to `~/.config/tmux/tmux.conf`, and installs/updates the required tmux plugins (`tmux-resurrect`, Catppuccin) | Yes |
+| `install-tmux.sh` | Installs [tmux](https://github.com/tmux/tmux/wiki) via apt. User config and plugins are managed separately (for example, with stow) | Yes |
 | `install-unikraft.sh` | Installs the [Unikraft](https://unikraft.org) toolchain (`kraft` via [kraftkit](https://kraftkit.sh)) to `/usr/local/bin` via the official installer | Yes |
 | `install-virt.sh` | Installs QEMU/KVM and libvirt for virtual machine management | Yes |
 | `install-zellij.sh` | Installs [Zellij](https://zellij.dev) terminal multiplexer via cargo with custom config and layouts | No |
