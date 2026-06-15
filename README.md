@@ -29,6 +29,7 @@ All scripts are located in `shell/` and target Ubuntu/Debian-based systems.
 | `install-tmux.sh` | Installs [tmux](https://github.com/tmux/tmux/wiki) via apt. User config and plugins are managed separately (for example, with stow) | Yes |
 | `install-unikraft.sh` | Installs the [Unikraft](https://unikraft.org) toolchain (`kraft` via [kraftkit](https://kraftkit.sh)) to `/usr/local/bin` via the official installer | Yes |
 | `install-virt.sh` | Installs QEMU/KVM and libvirt for virtual machine management | Yes |
+| `install-zig.sh` | Installs [Zig](https://ziglang.org) from the official tarball to `~/.local/bin` for the current user | No |
 | `install-zellij.sh` | Installs [Zellij](https://zellij.dev) terminal multiplexer via cargo with custom config and layouts | No |
 | `install-zsh-ohmyzsh.sh` | Installs [zsh](https://www.zsh.org), sets it as the default login shell, and installs [Oh My Zsh](https://ohmyz.sh) for the current user | Yes |
 | `setup-hashicorp-repo.sh` | Adds the HashiCorp apt repository and GPG key (idempotent, used by Packer/Terraform scripts) | Yes |
