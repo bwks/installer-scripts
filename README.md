@@ -12,9 +12,11 @@ All scripts are located in `shell/` and target Ubuntu/Debian-based systems.
 | `install-azurecli.sh` | Installs the [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/) via the Microsoft apt repository | Yes |
 | `install-cargo-tools.sh` | Installs cargo-based dev tools ([cargo-nextest](https://nexte.st/), [cargo-llvm-cov](https://github.com/taiki-e/cargo-llvm-cov)) for the current user | No |
 | `install-claudecode.sh` | Installs [Claude Code](https://claude.ai) CLI for the current user via the official install script | No |
+| `install-codex.sh` | Installs [Codex CLI](https://developers.openai.com/codex) via the official standalone installer, configures Bash, and installs Bubblewrap/AppArmor sandbox dependencies | Yes |
 | `install-dev-dependencies.sh` | Installs C build toolchain and headers for Rust FFI crates (build-essential, pkg-config, libssl-dev, libvirt-dev, etc.) | Yes |
 | `install-docker.sh` | Installs Docker Engine, CLI, Buildx, and Compose via the official Docker apt repository | Yes |
 | `install-githubcli.sh` | Installs the GitHub CLI (`gh`) via the official apt repository | Yes |
+| `install-herdr.sh` | Installs [Herdr](https://herdr.dev) for the current user via the official installer | No |
 | `install-nanos.sh` | Installs the [Nanos](https://nanos.org) unikernel toolchain (`ops`) to `$HOME/.ops/bin` via the official installer | No |
 | `install-nodejs.sh` | Installs [NVM](https://github.com/nvm-sh/nvm) and Node.js (latest LTS by default) with npm for the current user | No |
 | `install-opencode.sh` | Installs [opencode](https://opencode.ai) AI coding agent to `$HOME/.opencode/bin` via the official installer | No |
