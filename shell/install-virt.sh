@@ -20,7 +20,7 @@ echo "Installing QEMU/KVM and libvirt..."
 
 as_root apt-get update -qq
 as_root apt-get install -y -qq \
-  qemu-kvm \
+  qemu-system-x86 \
   qemu-utils \
   libvirt-daemon-system \
   libvirt-clients \
