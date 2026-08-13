@@ -8,8 +8,8 @@ set -euo pipefail
 #   NVM_VERSION=v0.40.3
 #   NODE_VERSION='lts/*'
 
-if [ "$(id -u)" -eq 0 ] || [ -n "${SUDO_USER:-}" ]; then
-  echo "Error: This script installs NVM for the current user and must not be run as root or with sudo."
+if [ "$(id -u)" -eq 0 ]; then
+  echo "Error: This script installs NVM for the current user and must not run as root."
   exit 1
 fi
 
