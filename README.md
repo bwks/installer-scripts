@@ -29,6 +29,7 @@ All scripts are located in `shell/` and target Ubuntu/Debian-based systems.
 | `install-tailscale.sh` | Installs [Tailscale](https://tailscale.com) via the official apt repository, then enables and starts `tailscaled` | Yes |
 | `install-terraform.sh` | Installs [HashiCorp Terraform](https://www.terraform.io/) via the official apt repository | Yes |
 | `install-tmux.sh` | Installs [tmux](https://github.com/tmux/tmux/wiki) via apt. User config and plugins are managed separately (for example, with stow) | Yes |
+| `install-tuicr.sh` | Installs [tuicr](https://tuicr.dev/) terminal UI for code review to `~/.local/bin` via the official installer | No |
 | `install-unikraft.sh` | Installs the [Unikraft](https://unikraft.org) toolchain (`kraft` via [kraftkit](https://kraftkit.sh)) to `/usr/local/bin` via the official installer | Yes |
 | `install-virt.sh` | Installs QEMU/KVM and libvirt for virtual machine management | Yes |
 | `install-zig.sh` | Installs [Zig](https://ziglang.org) from the official tarball to `~/.local/bin` for the current user | No |
