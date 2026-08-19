@@ -22,6 +22,7 @@ All scripts are located in `shell/` and target Ubuntu/Debian-based systems.
 | `install-opencode.sh` | Installs [opencode](https://opencode.ai) AI coding agent to `$HOME/.opencode/bin` via the official installer | No |
 | `install-packer.sh` | Installs HashiCorp Packer via the official apt repository | Yes |
 | `install-pi.sh` | Installs [pi](https://pi.dev) (Pi Coding Agent) globally via npm | No |
+| `install-protonpass-cli.sh` | Installs [Proton Pass CLI](https://protonpass.github.io/pass-cli/) to `~/.local/bin` via the official installer | No |
 | `install-qemu-guest-agent.sh` | Installs and enables the [QEMU Guest Agent](https://wiki.qemu.org/Features/GuestAgent) service | Yes |
 | `install-python-dev.sh` | Installs Python dev tools from [Astral](https://astral.sh) to `~/.local/bin`: uv (package manager), ruff (linter/formatter), and ty (type checker) | No |
 | `install-rust.sh` | Installs the Rust stable toolchain for the current user via [rustup](https://rustup.rs/) | No |
