@@ -17,6 +17,7 @@ All scripts are located in `shell/` and target Ubuntu/Debian-based systems.
 | `install-docker.sh` | Installs Docker Engine, CLI, Buildx, and Compose via the official Docker apt repository | Yes |
 | `install-githubcli.sh` | Installs the GitHub CLI (`gh`) via the official apt repository | Yes |
 | `install-herdr.sh` | Installs [Herdr](https://herdr.dev) for the current user via the official installer | No |
+| `install-mise.sh` | Installs [mise](https://mise.jdx.dev/) to `~/.local/bin` via the official installer and configures bash/zsh activation | No |
 | `install-nanos.sh` | Installs the [Nanos](https://nanos.org) unikernel toolchain (`ops`) to `$HOME/.ops/bin` via the official installer | No |
 | `install-nodejs.sh` | Installs [NVM](https://github.com/nvm-sh/nvm) and Node.js (latest LTS by default) with npm for the current user | No |
 | `install-opencode.sh` | Installs [opencode](https://opencode.ai) AI coding agent to `$HOME/.opencode/bin` via the official installer | No |
