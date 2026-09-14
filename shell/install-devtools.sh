@@ -21,6 +21,7 @@ echo "Installing development tools..."
 as_root apt-get update -qq
 as_root apt-get install -y -qq \
   stow \
+  jq \
   > /dev/null
 
 echo "Development tools installed."
