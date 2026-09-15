@@ -8,6 +8,7 @@ All scripts are located in `shell/` and target Ubuntu/Debian-based systems.
 
 | Script | Description | Elevated Privileges Required |
 |--------|-------------|:---:|
+| `install-1password-cli.sh` | Installs [1Password CLI](https://www.1password.dev/cli/get-started) (`op`) via the official APT repository | Yes |
 | `install-awscli.sh` | Installs the [AWS CLI v2](https://aws.amazon.com/cli/) from the official zip bundle | Yes |
 | `install-azurecli.sh` | Installs the [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/) via the Microsoft apt repository | Yes |
 | `install-cargo-tools.sh` | Installs cargo-based dev tools ([cargo-nextest](https://nexte.st/), [cargo-llvm-cov](https://github.com/taiki-e/cargo-llvm-cov)) for the current user | No |
