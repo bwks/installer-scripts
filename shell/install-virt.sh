@@ -32,10 +32,7 @@ as_root apt-get install -y -qq \
 # Enable and start libvirtd
 as_root systemctl enable --now libvirtd
 
-# Add the sherpa user to libvirt and kvm groups
-as_root usermod -aG libvirt sherpa
-as_root usermod -aG kvm sherpa
-echo "Added sherpa to libvirt and kvm groups."
+# Group membership is configured separately by setup-virt-user.sh
 
 # Verify
 echo ""

@@ -45,9 +45,7 @@ as_root apt-get install -y -qq \
 # Enable and start Docker
 as_root systemctl enable --now docker
 
-# Add the sherpa user to the docker group
-as_root usermod -aG docker sherpa
-echo "Added sherpa to docker group."
+# Group membership is configured separately by setup-docker-user.sh
 
 # Verify
 echo ""

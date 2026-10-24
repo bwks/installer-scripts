@@ -15,16 +15,16 @@ All scripts are located in `shell/` and target Ubuntu/Debian-based systems.
 | `install-claudecode.sh` | Installs [Claude Code](https://claude.ai) CLI for the current user via the official install script | No |
 | `install-codex.sh` | Installs [Codex CLI](https://developers.openai.com/codex) via the official standalone installer, configures Bash, and installs Bubblewrap/AppArmor sandbox dependencies | Yes |
 | `install-dev-dependencies.sh` | Installs C build toolchain and headers for Rust FFI crates (build-essential, pkg-config, libssl-dev, libvirt-dev, etc.) | Yes |
-| `install-docker.sh` | Installs Docker Engine, CLI, Buildx, and Compose via the official Docker apt repository | Yes |
+| `install-docker.sh` | Installs Docker Engine, CLI, Buildx, and Compose via the official Docker apt repository. Run `setup-docker-user.sh` to grant a user access | Yes |
 | `install-githubcli.sh` | Installs the GitHub CLI (`gh`) via the official apt repository | Yes |
 | `install-herdr.sh` | Installs [Herdr](https://herdr.dev) for the current user via the official installer | No |
-| `install-mise.sh` | Installs [mise](https://mise.jdx.dev/) to `~/.local/bin` via the official installer and configures bash/zsh activation | No |
-| `install-nanos.sh` | Installs the [Nanos](https://nanos.org) unikernel toolchain (`ops`) to `$HOME/.ops/bin` via the official installer | No |
+| `install-mise.sh` | Installs [mise](https://mise.jdx.dev/) via the official installer and configures bash/zsh activation. `--user` (default) installs to `~/.local/bin` and edits the user's rc files; `--global` installs to `/usr/local/bin` and activates for all users via `/etc/profile.d`, `/etc/bash.bashrc` and `/etc/zsh/zshrc` | `--global` only |
+| `install-nanos.sh` | Installs the [Nanos](https://nanos.org) unikernel toolchain (`ops`). `--user` (default) installs to `$HOME/.ops/bin` via the official installer; `--global` installs to `/usr/local/bin` for all users | `--global` only |
 | `install-nodejs.sh` | Installs [NVM](https://github.com/nvm-sh/nvm) and Node.js (latest LTS by default) with npm for the current user | No |
 | `install-opencode.sh` | Installs [opencode](https://opencode.ai) AI coding agent to `$HOME/.opencode/bin` via the official installer | No |
 | `install-packer.sh` | Installs HashiCorp Packer via the official apt repository | Yes |
 | `install-pi.sh` | Installs [pi](https://pi.dev) (Pi Coding Agent) globally via npm | No |
-| `install-protonpass-cli.sh` | Installs [Proton Pass CLI](https://protonpass.github.io/pass-cli/) to `~/.local/bin` via the official installer | No |
+| `install-protonpass-cli.sh` | Installs [Proton Pass CLI](https://protonpass.github.io/pass-cli/) via the official installer. `--user` (default) installs to `~/.local/bin`; `--global` installs to `/usr/local/bin` for all users | `--global` only |
 | `install-qemu-guest-agent.sh` | Installs and enables the [QEMU Guest Agent](https://wiki.qemu.org/Features/GuestAgent) service | Yes |
 | `install-python-dev.sh` | Installs Python dev tools from [Astral](https://astral.sh) to `~/.local/bin`: uv (package manager), ruff (linter/formatter), and ty (type checker) | No |
 | `install-rust.sh` | Installs the Rust stable toolchain for the current user via [rustup](https://rustup.rs/) | No |
@@ -34,12 +34,14 @@ All scripts are located in `shell/` and target Ubuntu/Debian-based systems.
 | `install-tmux.sh` | Installs [tmux](https://github.com/tmux/tmux/wiki) via apt. User config and plugins are managed separately (for example, with stow) | Yes |
 | `install-tuicr.sh` | Installs [tuicr](https://tuicr.dev/) terminal UI for code review to `~/.local/bin` via the official installer | No |
 | `install-unikraft.sh` | Installs the [Unikraft](https://unikraft.org) toolchain (`kraft` via [kraftkit](https://kraftkit.sh)) to `/usr/local/bin` via the official installer | Yes |
-| `install-virt.sh` | Installs QEMU/KVM and libvirt for virtual machine management | Yes |
+| `install-virt.sh` | Installs QEMU/KVM and libvirt for virtual machine management. Run `setup-virt-user.sh` to grant a user access | Yes |
 | `install-zig.sh` | Installs [Zig](https://ziglang.org) from the official tarball to `~/.local/bin` for the current user | No |
 | `install-zellij.sh` | Installs [Zellij](https://zellij.dev) terminal multiplexer via cargo with custom config and layouts | No |
 | `install-zsh-ohmyzsh.sh` | Installs [zsh](https://www.zsh.org), sets it as the default login shell, and installs [Oh My Zsh](https://ohmyz.sh) for the current user | Yes |
+| `setup-docker-user.sh` | Adds the current user (`$USER`) to the `docker` group. Run as that user after `install-docker.sh` | Uses sudo |
 | `setup-hashicorp-repo.sh` | Adds the HashiCorp apt repository and GPG key (idempotent, used by Packer/Terraform scripts) | Yes |
 | `setup-paths.sh` | Adds `$HOME/.local/bin` to PATH in `.bashrc` and `.zshrc` (idempotent) | No |
+| `setup-virt-user.sh` | Adds the current user (`$USER`) to the `libvirt` and `kvm` groups. Run as that user after `install-virt.sh` | Uses sudo |
 | `update-claudecode.sh` | Updates Claude Code to the latest version in `/usr/local/bin` | Yes |
 | `update-python-dev.sh` | Updates uv, ruff, and ty to the latest versions in `/usr/local/bin` | Yes |
 | `update-rust.sh` | Updates the system-wide Rust stable toolchain via rustup | Yes |
