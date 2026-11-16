@@ -11,6 +11,7 @@ All scripts are located in `shell/` and target Ubuntu/Debian-based systems.
 | `install-1password-cli.sh` | Installs [1Password CLI](https://www.1password.dev/cli/get-started) (`op`) via the official APT repository | Yes |
 | `install-awscli.sh` | Installs the [AWS CLI v2](https://aws.amazon.com/cli/) from the official zip bundle | Yes |
 | `install-azurecli.sh` | Installs the [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/) via the Microsoft apt repository | Yes |
+| `install-bash-ohmybash.sh` | Installs bash, sets it as the default login shell, and installs [Oh My Bash](https://ohmybash.github.io) for the current user. Existing `~/.bashrc` is backed up and replaced | Yes |
 | `install-cargo-tools.sh` | Installs cargo-based dev tools ([cargo-nextest](https://nexte.st/), [cargo-llvm-cov](https://github.com/taiki-e/cargo-llvm-cov)) for the current user | No |
 | `install-claudecode.sh` | Installs [Claude Code](https://claude.ai) CLI for the current user via the official install script | No |
 | `install-codex.sh` | Installs [Codex CLI](https://developers.openai.com/codex) via the official standalone installer, configures Bash, and installs Bubblewrap/AppArmor sandbox dependencies | Yes |
